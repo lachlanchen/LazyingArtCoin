@@ -1,0 +1,21 @@
+{
+  "name": "lazyartcoin-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hardhat project for deploying LazyArtCoin test token on Sepolia.",
+  "scripts": {
+    "compile": "hardhat compile",
+    "clean": "hardhat clean",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "verify:sepolia": "hardhat verify --network sepolia",
+    "console:sepolia": "hardhat console --network sepolia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.4"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazyArtCoin Testnet (Sepolia) – Rehearse Your Launch</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__content">
+            <h1>LazyArtCoin Testnet</h1>
+            <p class="hero__subtitle">Spin up LazyArtCoin (LAC) on Sepolia, distribute credits to teammates, and perfect your launch plan without touching mainnet ETH.</p>
+            <div class="hero__cta">
+                <a class="button" href="#tokenomics">Test Tokenomics</a>
+                <a class="button button--secondary" href="#get-started">Sepolia Checklist</a>
+                <a class="button" href="settings.html">Open Test Control Center</a>
+            </div>
+        </div>
+        <div class="hero__art">
+            <img src="assets/img/lazy-artist.svg" alt="Lazy artist illustration">
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="about">
+            <div class="section__heading">
+                <h2>Why a Test Token?</h2>
+                <p>Sepolia LAC mirrors your production contract but lives on testnet. Deploy, mint, pause, and share allocations so everyone understands the LazyArtCoin workflow before the real launch.</p>
+            </div>
+            <div class="grid grid--features">
+                <article class="card">
+                    <h3>Risk-Free Rehearsal</h3>
+                    <p>Dry-run every on-chain action—deployment, treasury minting, emergency pause—using faucet ETH.</p>
+                </article>
+                <article class="card">
+                    <h3>Team Onboarding</h3>
+                    <p>Let creators and admins practice claiming and spending credits with identical UX.</p>
+                </article>
+                <article class="card">
+                    <h3>API & Backend Tests</h3>
+                    <p>Point staging services at the test token and ensure payouts, AI billing, and dashboards behave as expected.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section--accent" id="tokenomics">
+            <div class="section__heading">
+                <h2>Test Token Parameters</h2>
+                <p>Everything matches production unless you deliberately change it.</p>
+            </div>
+            <div class="tokenomics">
+                <div class="tokenomics__item">
+                    <span class="label">Symbol</span>
+                    <span class="value">LAC</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Decimals</span>
+                    <span class="value">18 (1 LAC = 10<sup>18</sup> units)</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Initial Supply</span>
+                    <span class="value" id="initial-supply">Set at deploy</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Treasury</span>
+                    <span class="value" id="treasury">Matches production roles</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Contract</span>
+                    <span class="value" id="contract-address">Deploy on Sepolia</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="get-started">
+            <div class="section__heading">
+                <h2>Sepolia Launch Checklist</h2>
+                <p>Gather these items and you can deploy test LAC in minutes.</p>
+            </div>
+            <ol class="checklist">
+                <li>Grab Sepolia ETH from a faucet and fund your MetaMask test account.</li>
+                <li>Create `.env` inside `lazyartcoin_test/token` with your Sepolia RPC URL, private key, owner, treasury, and optional initial supply.</li>
+                <li>Run `npm install` inside `lazyartcoin_test/token` (first time only).</li>
+                <li>Deploy via the web control center (recommended) or CLI: `npm run deploy:sepolia`.</li>
+                <li>Add the new contract address to the dashboard when prompted.</li>
+                <li>Mint LAC to teammates and have them import the token in MetaMask.</li>
+                <li>Use `pause` and `unpause` to rehearse emergency runbooks.</li>
+                <li>Document learnings before you move to mainnet.</li>
+            </ol>
+        </section>
+
+        <section class="section section--dashboard" id="dashboard">
+            <div class="section__heading">
+                <h2>Live Test Dashboard</h2>
+                <p>Connect MetaMask (Sepolia) to read supply and balances for your LAC deployment.</p>
+            </div>
+            <div class="dashboard">
+                <div class="dashboard__form">
+                    <label for="contract-input">Token contract address</label>
+                    <input type="text" id="contract-input" placeholder="0x..." autocomplete="off">
+                    <button id="load-contract" class="button">Load Token</button>
+                </div>
+                <div class="dashboard__wallet">
+                    <button id="connect-wallet" class="button">Connect MetaMask</button>
+                    <p id="wallet-status">Wallet disconnected</p>
+                </div>
+                <div class="dashboard__metrics">
+                    <div class="metric">
+                        <span class="label">Total Supply</span>
+                        <span class="value" id="total-supply">–</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Treasury Balance</span>
+                        <span class="value" id="treasury-balance">–</span>
+                    </div>
+                <div class="metric">
+                    <span class="label">Your LAC Balance</span>
+                    <span class="value" id="wallet-balance">–</span>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="section__heading">
+                <h2>Testnet FAQ</h2>
+                <p>Everything you and your testers need to know.</p>
+            </div>
+            <div class="accordion">
+                <details>
+                    <summary>Does test LAC behave like real LAC?</summary>
+                    <p>Yes. It uses the exact same contract, so all behaviors—from minting to pausing—match production.</p>
+                </details>
+                <details>
+                    <summary>How do testers get Sepolia ETH?</summary>
+                    <p>Direct them to a trusted faucet, send ETH to their MetaMask address, and have them connect to the control center.</p>
+                </details>
+                <details>
+                    <summary>Can we airdrop test LAC automatically?</summary>
+                    <p>Use the mint tools in the control center or write a short Hardhat script to distribute to many addresses at once.</p>
+                </details>
+                <details>
+                    <summary>What if we break something?</summary>
+                    <p>That’s the point of testing—deploy again on Sepolia, update the control center with the new contract address, and keep iterating.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> LazyArt. All rights reserved (testnet).</p>
+        <p class="footer__links">
+            <a href="mailto:founders@lazy.art">Contact</a>
+            <a href="#get-started">Sepolia guide</a>
+            <a href="settings.html">Control center</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
