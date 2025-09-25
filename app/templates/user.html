@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User {{ user_id }} • Credits</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>User {{ user_id }}</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/health" target="_blank">Health</a>
+        <a href="/settings">Settings</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h2>Balance</h2>
+      <p><strong>{{ balance }}</strong> credits</p>
+    </section>
+
+    <section class="card">
+      <h2>Payouts</h2>
+      {% if payouts %}
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Credits</th>
+              <th>Units</th>
+              <th>Asset</th>
+              <th>To</th>
+              <th>Tx Hash</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in payouts %}
+            <tr>
+              <td>{{ p["id"] }}</td>
+              <td>{{ p["status"] }}</td>
+              <td>{{ p["credits"] }}</td>
+              <td>{{ p["units"] }}</td>
+              <td>{{ p["asset"] }}</td>
+              <td class="mono">{{ p["address"] }}</td>
+              <td class="mono">{{ p.get("tx_hash") or "-" }}</td>
+              <td>{{ p["created_at"] }}</td>
+            </tr>
+            {% end %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p>No payouts yet.</p>
+      {% end %}
+    </section>
+  </div>
+</body>
+</html>

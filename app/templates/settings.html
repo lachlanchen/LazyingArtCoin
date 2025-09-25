@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings • Credits Payout</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Payout Settings</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/health" target="_blank">Health</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h2>Configuration</h2>
+      {% if saved %}
+      <div class="notice success">Settings saved. The payout engine will reload with the new values.</div>
+      {% end %}
+      {% if error_message %}
+      <div class="notice error">{{ error_message }}</div>
+      {% end %}
+      <form method="post">
+        <label>
+          Web3 Provider URL
+          <input type="text" name="WEB3_PROVIDER_URL" placeholder="https://" value="{{ settings.get('WEB3_PROVIDER_URL') or '' }}" {% if env_overrides.get('WEB3_PROVIDER_URL') %}disabled{% end %} />
+        </label>
+        {% if env_overrides.get('WEB3_PROVIDER_URL') %}
+        <p class="notice">Managed via environment variable.</p>
+        {% end %}
+
+        <label>
+          Payout Private Key
+          <textarea name="PAYOUT_PRIVATE_KEY" placeholder="Paste 0x-prefixed testnet key" {% if env_overrides.get('PAYOUT_PRIVATE_KEY') %}disabled{% end %}></textarea>
+        </label>
+        <p class="notice">Current status: {{ masked_private_key or 'Not set' }}</p>
+        {% if not env_overrides.get('PAYOUT_PRIVATE_KEY') %}
+        <label class="row" style="gap:6px; align-items:center;">
+          <input type="checkbox" name="clear_private_key" value="on" />
+          <span>Clear stored private key</span>
+        </label>
+        {% else %}
+        <p class="notice">Private key managed via environment variable.</p>
+        {% end %}
+
+        <div class="row">
+          <div style="flex:1;">
+            <label>
+              Chain ID
+              <input type="text" name="CHAIN_ID" placeholder="11155111" value="{{ settings.get('CHAIN_ID') or '' }}" {% if env_overrides.get('CHAIN_ID') %}disabled{% end %} />
+            </label>
+          </div>
+          <div style="flex:1;">
+            <label>
+              Units per Credit
+              <input type="text" name="UNITS_PER_CREDIT" placeholder="1000000000000000" value="{{ settings.get('UNITS_PER_CREDIT') or '' }}" {% if env_overrides.get('UNITS_PER_CREDIT') %}disabled{% end %} />
+            </label>
+          </div>
+        </div>
+
+        <label>
+          ERC-20 Token Address
+          <input type="text" name="TOKEN_ADDRESS" placeholder="0x... (optional)" value="{{ settings.get('TOKEN_ADDRESS') or '' }}" {% if env_overrides.get('TOKEN_ADDRESS') %}disabled{% end %} />
+        </label>
+
+        <label>
+          ERC-20 Token Decimals
+          <input type="text" name="TOKEN_DECIMALS" placeholder="18" value="{{ settings.get('TOKEN_DECIMALS') or '' }}" {% if env_overrides.get('TOKEN_DECIMALS') %}disabled{% end %} />
+        </label>
+
+        <button type="submit">Save Settings</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Payout Engine Status</h2>
+      <p><strong>Configured:</strong> {{ 'Yes' if status.get('configured') else 'No' }}</p>
+      <p><strong>From address:</strong> {{ status.get('from_address') or 'Not available' }}</p>
+      <p><strong>Asset:</strong> {{ status.get('asset') or 'Unknown' }}</p>
+      <p><strong>Token mode:</strong> {{ 'Enabled' if status.get('token_mode') else 'Native ETH' }}</p>
+      {% if status.get('error') %}
+      <p class="notice error">{{ status.get('error') }}</p>
+      {% else %}
+      <p class="notice success">Payout module ready.</p>
+      {% end %}
+    </section>
+  </div>
+</body>
+</html>

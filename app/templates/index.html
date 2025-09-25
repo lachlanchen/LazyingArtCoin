@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credits Payout MVP</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Credits Payout MVP</h1>
+      <nav>
+        <a href="/health" target="_blank">Health</a>
+        <a href="/settings">Settings</a>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">Docs</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h2>Earn Credits</h2>
+      <form method="post" action="/earn">
+        <label>
+          User ID
+          <input type="text" name="user_id" required placeholder="u1" />
+        </label>
+        <label>
+          Credits to add
+          <input type="number" name="credits" min="1" required placeholder="100" />
+        </label>
+        <button type="submit">Add Credits</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Payout</h2>
+      <form method="post" action="/payout">
+        <label>
+          User ID
+          <input type="text" name="user_id" required placeholder="u1" />
+        </label>
+        <label>
+          Recipient Address
+          <input type="text" name="address" required placeholder="0x..." />
+        </label>
+        <label>
+          Credits to pay
+          <input type="number" name="credits" min="1" required placeholder="50" />
+        </label>
+        <label>
+          Idempotency Key (optional)
+          <input type="text" id="idem" name="idempotency_key" placeholder="uuid-1" />
+        </label>
+        <div class="row">
+          <button type="submit">Send Payout</button>
+          <button type="button" class="secondary" id="gen">Generate Key</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>User Page</h2>
+      <div class="row">
+        <input type="text" id="userLookup" placeholder="u1" />
+        <button type="button" id="viewUser">View</button>
+      </div>
+    </section>
+
+    <footer>
+      <small>MVP demo. Do not use in production without proper security and compliance.</small>
+    </footer>
+  </div>
+
+  <script>
+    const genBtn = document.getElementById('gen');
+    if (genBtn) {
+      genBtn.addEventListener('click', () => {
+        const v = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+        const input = document.getElementById('idem');
+        if (input) input.value = v;
+      });
+    }
+    const viewBtn = document.getElementById('viewUser');
+    if (viewBtn) {
+      viewBtn.addEventListener('click', () => {
+        const id = (document.getElementById('userLookup') || {}).value || '';
+        if (id.trim()) window.location.href = `/user/${encodeURIComponent(id.trim())}`;
+      });
+    }
+  </script>
+</body>
+</html>
