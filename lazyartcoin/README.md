@@ -8,7 +8,7 @@ LazyArtCoin (LAC) is the native ERC-20 token for the LazyArt platform. This laun
 lazyartcoin/
 ├── README.md                 # This guide
 ├── token/                    # Hardhat project for the ERC-20 smart contract
-└── website/                  # Static marketing site with wallet-enabled dashboard
+└── website/                  # Static marketing site with wallet-enabled dashboard & control center
 ```
 
 ---
@@ -117,6 +117,7 @@ The website is a static bundle that you can host on Vercel, Netlify, GitHub Page
 - Launch checklist that mirrors the Hardhat workflow.
 - FAQ for community transparency.
 - Wallet-enabled dashboard that connects via MetaMask and reads live LAC balances using `ethers.js`.
+- A control center (`settings.html`) that guides you through deployment, treasury minting, and pause controls—no CLI required once your wallet is funded.
 
 ### Local preview
 
@@ -126,17 +127,21 @@ python3 -m http.server 8081
 # Visit http://localhost:8081
 ```
 
+Open `settings.html` in the same preview to access the control center (for example `http://localhost:8081/settings.html`).
+
 ### Customisation tips
 
 - Update `index.html` copy or imagery (`assets/img/lazy-artist.svg`) to match future campaigns.
 - Styling lives inside `assets/css/styles.css`. Colors and gradients are defined at the top using CSS variables.
 - Behaviour (wallet connection, balance lookups) sits inside `assets/js/main.js`. Swap in your deployed contract address or extend the dashboard with additional analytics.
+- Deployment + admin logic lives in `assets/js/settings.js`. It consumes the compiled artifact located at `assets/abi/LazyArtCoin.json`.
 
 ### Going live
 
 1. Upload the `website/` directory contents to your hosting provider.
 2. Configure HTTPS + a custom domain (for example `https://token.lazy.art`).
 3. Optional: add analytics and newsletter embeds for community growth.
+4. Share the `settings.html` link privately with the ops team; never post your deployment dashboard publicly.
 
 ---
 
@@ -147,6 +152,7 @@ python3 -m http.server 8081
 - **Emergency pause:** If compromised credentials or suspicious activity occurs, call `pause()` from the multisig. Resume with `unpause()` once resolved.
 - **Auditing:** Run `npx hardhat test` after you add tests, and consider `npx hardhat coverage` or `slither .` for static analysis.
 - **Compliance:** Consult counsel before mass distributions or token sales. Document tokenomics, vesting, and burn schedules in public-facing materials.
+- **Security:** Never paste private keys into the control center. All privileged calls must be signed inside MetaMask (or another hardware wallet connected to MetaMask).
 
 ---
 

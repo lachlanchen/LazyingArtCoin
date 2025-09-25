@@ -4,6 +4,8 @@
         yearEl.textContent = new Date().getFullYear();
     }
 
+    const CONTRACT_STORAGE_KEY = "lac:contractAddress";
+
     const defaultProvider = ethers.getDefaultProvider("mainnet");
     let walletProvider;
     let signer;
@@ -74,8 +76,8 @@
         return defaultProvider;
     };
 
-    const loadToken = async () => {
-        const address = elements.contractInput.value.trim();
+    const loadToken = async (addressOverride) => {
+        const address = (addressOverride || elements.contractInput.value || "").trim();
         if (!ethers.isAddress(address)) {
             alert("Enter a valid Ethereum address for the token contract.");
             return;
@@ -107,6 +109,8 @@
             } else {
                 elements.walletBalance.textContent = "Connect wallet";
             }
+
+            localStorage.setItem(CONTRACT_STORAGE_KEY, address);
         } catch (err) {
             console.error(err);
             alert("Unable to load contract data. Confirm network access and that the address is correct.");
@@ -131,4 +135,12 @@
     if (elements.loadContract) {
         elements.loadContract.addEventListener("click", loadToken);
     }
+
+    window.addEventListener("load", () => {
+        const stored = localStorage.getItem(CONTRACT_STORAGE_KEY);
+        if (stored && ethers.isAddress(stored)) {
+            elements.contractInput.value = stored;
+            loadToken(stored);
+        }
+    });
 })();

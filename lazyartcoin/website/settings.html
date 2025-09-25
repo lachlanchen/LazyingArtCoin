@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazyArtCoin Launcher</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/settings.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="settings">
+    <nav class="settings__nav">
+        <a href="index.html" class="logo">LazyArtCoin</a>
+        <div class="settings__nav-links">
+            <a href="#deploy">Deploy</a>
+            <a href="#contract">Manage</a>
+            <a href="#danger-zone">Emergency</a>
+        </div>
+        <button id="connect-wallet" class="button">Connect MetaMask</button>
+    </nav>
+
+    <main class="settings__container">
+        <section id="status" class="settings__card">
+            <h1>LazyArtCoin Control Center</h1>
+            <p>Configure deployment parameters, launch LAC on mainnet, and run treasury operations directly in your browser. Wallet secrets stay in MetaMask—never paste private keys here.</p>
+            <div class="status-panel">
+                <div class="status-panel__item">
+                    <span class="label">Wallet</span>
+                    <span class="value" id="wallet-status">Disconnected</span>
+                </div>
+                <div class="status-panel__item">
+                    <span class="label">Network</span>
+                    <span class="value" id="network-status">Unknown</span>
+                </div>
+                <div class="status-panel__item">
+                    <span class="label">Active Contract</span>
+                    <span class="value" id="contract-status">Not selected</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="deploy" class="settings__card">
+            <h2>Deploy LazyArtCoin</h2>
+            <p>Fill in the launch parameters and deploy via MetaMask. All amounts are in whole LAC (1 LAC = 10<sup>18</sup> units).</p>
+            <form id="deploy-form" class="form-grid">
+                <label>
+                    Owner address (defaults to connected wallet)
+                    <input type="text" id="owner-input" placeholder="0x...">
+                </label>
+                <label>
+                    Treasury address (defaults to owner)
+                    <input type="text" id="treasury-input" placeholder="0x...">
+                </label>
+                <label>
+                    Initial supply (whole LAC)
+                    <input type="number" id="supply-input" min="0" step="1" placeholder="1000000">
+                </label>
+                <label>
+                    Network (target chain)
+                    <select id="network-select">
+                        <option value="1">Ethereum Mainnet</option>
+                        <option value="11155111">Sepolia Testnet</option>
+                    </select>
+                </label>
+                <button type="submit" class="button">Deploy LazyArtCoin</button>
+            </form>
+            <div id="deploy-output" class="output"></div>
+        </section>
+
+        <section id="contract" class="settings__card">
+            <h2>Manage Treasury & Distribution</h2>
+            <p>Attach an existing LazyArtCoin contract to run mint, treasury, and metadata updates.</p>
+            <div class="form-grid">
+                <label>
+                    Active contract address
+                    <input type="text" id="contract-input" placeholder="0x...">
+                </label>
+                <button id="save-contract" class="button">Activate Contract</button>
+                <button id="refresh-stats" class="button button--secondary">Refresh Stats</button>
+            </div>
+            <div class="metrics" id="contract-metrics"></div>
+
+            <h3>Treasury tools</h3>
+            <form id="mint-treasury-form" class="form-grid">
+                <label>
+                    Amount to mint (whole LAC)
+                    <input type="number" id="mint-treasury-amount" min="0" step="1" required>
+                </label>
+                <button type="submit" class="button">Mint to Treasury</button>
+            </form>
+
+            <form id="mint-address-form" class="form-grid">
+                <label>
+                    Recipient address
+                    <input type="text" id="mint-recipient" placeholder="0x..." required>
+                </label>
+                <label>
+                    Amount (whole LAC)
+                    <input type="number" id="mint-amount" min="0" step="1" required>
+                </label>
+                <button type="submit" class="button">Mint to Address</button>
+            </form>
+
+            <form id="set-treasury-form" class="form-grid">
+                <label>
+                    New treasury address
+                    <input type="text" id="new-treasury" placeholder="0x..." required>
+                </label>
+                <button type="submit" class="button button--secondary">Update Treasury</button>
+            </form>
+        </section>
+
+        <section id="danger-zone" class="settings__card settings__card--danger">
+            <h2>Emergency Controls</h2>
+            <p>Use these only during incidents. Actions execute immediately via MetaMask.</p>
+            <div class="danger-actions">
+                <button id="pause-token" class="button button--danger">Pause Transfers</button>
+                <button id="unpause-token" class="button button--secondary">Resume Transfers</button>
+            </div>
+            <div class="danger-actions">
+                <button id="renounce-ownership" class="button button--danger">Renounce Ownership</button>
+            </div>
+            <p class="notice">Renouncing ownership is irreversible. Only proceed if governance policies require it.</p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js" integrity="sha384-03Xxw1fahLaeoyQVSOyT1pVtB4RTysP03nSsuWwfOsTzg/oTx2nDSgpg+49ORN71" crossorigin="anonymous"></script>
+    <script src="assets/js/settings.js"></script>
+</body>
+</html>
