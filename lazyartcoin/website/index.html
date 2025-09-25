@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LazyArtCoin (LAC) – Creativity Credits for the LazyArt Platform</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__content">
+            <h1>LazyArtCoin (LAC)</h1>
+            <p class="hero__subtitle">Fuel creativity, reward contributors, and unlock AI-powered publishing on the LazyArt platform.</p>
+            <div class="hero__cta">
+                <a class="button" href="#tokenomics">Explore Tokenomics</a>
+                <a class="button button--secondary" href="#get-started">Launch Checklist</a>
+            </div>
+        </div>
+        <div class="hero__art">
+            <img src="assets/img/lazy-artist.svg" alt="Lazy artist illustration">
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="about">
+            <div class="section__heading">
+                <h2>Why LazyArtCoin?</h2>
+                <p>LAC is the native currency that powers posts, audio drops, and premium AI tooling on LazyArt. Fans support creators directly, while contributors retain full control over their ideas.</p>
+            </div>
+            <div class="grid grid--features">
+                <article class="card">
+                    <h3>Creator-Centric</h3>
+                    <p>Reward writers, voice actors, and designers instantly with programmable payouts tied to their posts.</p>
+                </article>
+                <article class="card">
+                    <h3>AI Marketplace Ready</h3>
+                    <p>Use LAC to invoke AI services, run style transfers, and unlock premium collaboration tools.</p>
+                </article>
+                <article class="card">
+                    <h3>Governance Friendly</h3>
+                    <p>Pause, mint, or burn responsibly with multisig ownership controls and transparent on-chain history.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section--accent" id="tokenomics">
+            <div class="section__heading">
+                <h2>Token Design</h2>
+                <p>LazyArtCoin ships with production-grade guardrails while staying flexible for future seasons and drops.</p>
+            </div>
+            <div class="tokenomics">
+                <div class="tokenomics__item">
+                    <span class="label">Symbol</span>
+                    <span class="value">LAC</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Decimals</span>
+                    <span class="value">18 (1 LAC = 10<sup>18</sup> units)</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Initial Supply</span>
+                    <span class="value" id="initial-supply">Configurable at deploy</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Treasury</span>
+                    <span class="value" id="treasury">Set to LazyArt multisig</span>
+                </div>
+                <div class="tokenomics__item">
+                    <span class="label">Contract</span>
+                    <span class="value" id="contract-address">Pending deployment</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="get-started">
+            <div class="section__heading">
+                <h2>Mainnet Launch Checklist</h2>
+                <p>Follow these steps to deploy and activate LazyArtCoin on Ethereum mainnet.</p>
+            </div>
+            <ol class="checklist">
+                <li>Fund the deployer wallet with ETH on mainnet (gas for deploy + verification + liquidity).</li>
+                <li>Populate <code>.env</code> with <code>MAINNET_RPC_URL</code>, <code>DEPLOYER_PRIVATE_KEY</code>, <code>OWNER_ADDRESS</code>, and <code>TREASURY_ADDRESS</code>.</li>
+                <li>Run <code>npm install</code> inside <code>lazyartcoin/token</code> to pull Hardhat and OpenZeppelin contracts.</li>
+                <li>Deploy: <code>npm run deploy:mainnet</code>.</li>
+                <li>Verify: <code>npm run verify:mainnet -- &lt;deployed_address&gt; &lt;owner&gt; &lt;treasury&gt; &lt;initial_supply&gt;</code>.</li>
+                <li>Transfer ownership to the LazyArt multisig for operational safety.</li>
+                <li>List LAC on a DEX (Uniswap) and seed liquidity with WETH.</li>
+                <li>Publish your official contract address on lazy.art and socials.</li>
+            </ol>
+        </section>
+
+        <section class="section section--dashboard" id="dashboard">
+            <div class="section__heading">
+                <h2>Live Dashboard</h2>
+                <p>Connect a wallet to inspect balances or track the circulating supply once LazyArtCoin is live.</p>
+            </div>
+            <div class="dashboard">
+                <div class="dashboard__form">
+                    <label for="contract-input">Token contract address</label>
+                    <input type="text" id="contract-input" placeholder="0x..." autocomplete="off">
+                    <button id="load-contract" class="button">Load Token</button>
+                </div>
+                <div class="dashboard__wallet">
+                    <button id="connect-wallet" class="button">Connect MetaMask</button>
+                    <p id="wallet-status">Wallet disconnected</p>
+                </div>
+                <div class="dashboard__metrics">
+                    <div class="metric">
+                        <span class="label">Total Supply</span>
+                        <span class="value" id="total-supply">–</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Treasury Balance</span>
+                        <span class="value" id="treasury-balance">–</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Your LAC Balance</span>
+                        <span class="value" id="wallet-balance">–</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="section__heading">
+                <h2>FAQ</h2>
+                <p>Answers to the most common questions contributors and fans ask.</p>
+            </div>
+            <div class="accordion">
+                <details>
+                    <summary>How is LAC secured?</summary>
+                    <p>The core contract is powered by battle-tested OpenZeppelin libraries, supports emergency pausing, and should be administered by a Safe multisig. All upgrades are transparent on-chain.</p>
+                </details>
+                <details>
+                    <summary>Can supply expand over time?</summary>
+                    <p>Yes. The LazyArt treasury can mint new LAC for fresh campaigns or AI compute credits. All mint events are public so the community can track issuance.</p>
+                </details>
+                <details>
+                    <summary>What networks are supported?</summary>
+                    <p>Production runs on Ethereum mainnet. Use Sepolia for dry runs and QA by changing the Hardhat network flag.</p>
+                </details>
+                <details>
+                    <summary>Will there be staking or governance?</summary>
+                    <p>Future roadmap items include staking for power users and quadratic voting for featured creators. Join the LazyArt Discord to participate.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> LazyArt. All rights reserved.</p>
+        <p class="footer__links">
+            <a href="mailto:founders@lazy.art">Contact</a>
+            <a href="#get-started">Launch guide</a>
+            <a href="#faq">FAQ</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js" integrity="sha384-03Xxw1fahLaeoyQVSOyT1pVtB4RTysP03nSsuWwfOsTzg/oTx2nDSgpg+49ORN71" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

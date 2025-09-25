@@ -1,0 +1,23 @@
+{
+  "name": "lazyartcoin-token",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hardhat project for deploying the LazyArtCoin (LAC) ERC-20 token on Ethereum mainnet.",
+  "scripts": {
+    "compile": "hardhat compile",
+    "clean": "hardhat clean",
+    "test": "hardhat test",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network mainnet",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "verify:mainnet": "hardhat verify --network mainnet",
+    "verify:sepolia": "hardhat verify --network sepolia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.4"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}
