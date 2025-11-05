@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LazyingArt Coin</title>
+    <meta name="description" content="LazyingArt Coin powers rewards that flow across the LazyingArt, OnlyIdeas, and EchoMind ecosystem.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050510;
+            --bg-gradient: linear-gradient(135deg, #090921 0%, #121233 36%, #17174a 100%);
+            --text-main: #f7f8ff;
+            --text-muted: rgba(247, 248, 255, 0.72);
+            --accent: #8a7bff;
+            --accent-soft: rgba(138, 123, 255, 0.12);
+            --accent-secondary: #5be2ff;
+            --card-bg: rgba(14, 14, 36, 0.72);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 24px 48px rgba(26, 26, 64, 0.35);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-main);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.3) 0, transparent 60%),
+                radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.2) 0, transparent 55%),
+                radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.25) 0, transparent 55%);
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(5, 5, 16, 0.85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--accent-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 5rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.4rem);
+            margin: 0 0 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-dark);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-soft);
+            transform: translateY(-2px);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            box-shadow: 0 18px 36px rgba(9, 9, 28, 0.35);
+            min-height: 100%;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(91, 226, 255, 0.12);
+            color: var(--accent-secondary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-lead {
+            max-width: 680px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-secondary);
+        }
+
+        .timeline {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 140px 1fr;
+            align-items: start;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-secondary);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        footer {
+            border-top: 1px solid var(--card-border);
+            background: rgba(5, 5, 16, 0.9);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 720px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <header>
+        <nav>
+            <span class="brand">LazyingArt Coin</span>
+            <div class="nav-links">
+                <a href="#utility">Utility</a>
+                <a href="#ecosystem">Ecosystem</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#connect">Connect</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="container hero">
+                <div>
+                    <span class="badge">Token Utility</span>
+                    <h1>The reward layer for the LazyingArt universe.</h1>
+                    <p>
+                        LazyingArt Coin powers incentives across <span class="highlight">OnlyIdeas</span>,
+                        <span class="highlight">EchoMind</span>, and the broader LazyingArt studio.
+                        Every contribution, conversation, and creative insight earns value that can move
+                        on-chain when you are ready.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="https://lazying.art" target="_blank" rel="noopener noreferrer">
+                            Explore LazyingArt
+                        </a>
+                        <a class="btn btn-secondary" href="https://onlyideas.art" target="_blank" rel="noopener noreferrer">
+                            Visit OnlyIdeas
+                        </a>
+                        <a class="btn btn-secondary" href="https://chat.lazying.art" target="_blank" rel="noopener noreferrer">
+                            Meet EchoMind
+                        </a>
+                        <a class="btn btn-secondary" href="https://github.com/lachlanchen/LazyingArtCoin" target="_blank" rel="noopener noreferrer">
+                            View Repository
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="card">
+                        <h3>Engineered for creators</h3>
+                        <p>
+                            The LazyingArt Coin service issues credits on contribution, settles balances in ETH or
+                            ERC-20 tokens, and keeps a transparent ledger. It connects the community spaces where
+                            creative work, AI dialogue, and membership intersect.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="utility">
+            <div class="container">
+                <h2 class="section-title">Designed for real utility</h2>
+                <p class="section-lead">
+                    Credits start inside our apps and graduate to on-chain value. The MVP shipping in this repository
+                    focuses on reliability, clear conversion, and transparent accounting.
+                </p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Creator Earnings</h3>
+                        <p>
+                            OnlyIdeas rewards community proposals, critiques, and curated research with credits that
+                            convert to LazyingArt Coin balances.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>AI Collaboration</h3>
+                        <p>
+                            EchoMind sessions unlock bonuses for multilingual coaching, conversation hosting, and prompt
+                            design that keeps the experience human-first.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>Studio Loyalty</h3>
+                        <p>
+                            LazyingArt flagship launches, hardware drops, and field labs issue seasonal quests tied to
+                            the coin, giving contributors early access and revenue share experiments.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>On-Chain Payouts</h3>
+                        <p>
+                            Secure Tornado + Web3 backend pays out in ETH or a configured ERC-20 token when balances
+                            clear review, with idempotent requests and nonce locking.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ecosystem">
+            <div class="container">
+                <span class="badge">Ecosystem Links</span>
+                <h2 class="section-title">One coin, three experiences</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>OnlyIdeas</h3>
+                        <p>
+                            Curate the future of art, hardware, and research. Credits flow to contributors whose ideas
+                            reach prototype milestones and community adoption.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>EchoMind</h3>
+                        <p>
+                            Multilingual AI conversations earn engagement rewards, with auto-translated transcripts and
+                            community moderators capturing the best knowledge moments.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3>LazyingArt Studio</h3>
+                        <p>
+                            The parent studio orchestrates token sinks and unlocks: merch, field experiences, and direct
+                            patronage for the teams building the tools.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <div class="container">
+                <h2 class="section-title">Roadmap highlights</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Now</div>
+                        <div class="timeline-content">
+                            <strong>Credits MVP shipped.</strong>
+                            <p>
+                                Tornado service with SQLite ledger, Sepolia payout support, and a clean admin UI is ready
+                                for experiments inside the ecosystem.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Q3</div>
+                        <div class="timeline-content">
+                            <strong>Creator beta.</strong>
+                            <p>
+                                Onboard OnlyIdeas cohorts and EchoMind hosts, tune earn curves, and monitor gas analytics
+                                before scaling community programs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Q4</div>
+                        <div class="timeline-content">
+                            <strong>Public launch.</strong>
+                            <p>
+                                Open up LazyingArt Coin to partners, publish the token playbook, and introduce automatic
+                                conversion bridges inside LazyingArt hardware and web apps.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="connect">
+            <div class="container">
+                <div class="card" style="text-align: center;">
+                    <h3>Ready to go live on coin.lazying.art?</h3>
+                    <p style="margin-bottom: 1.5rem;">
+                        Configure your DNS with a CNAME that points <code>coin.lazying.art</code> to
+                        <code>lachlanchen.github.io</code>, then enable GitHub Pages for this repository using the
+                        <code>/docs</code> folder. The page you are reading will become the front door for the token.
+                    </p>
+                    <div class="hero-actions" style="justify-content: center;">
+                        <a class="btn btn-primary" href="https://github.com/lachlanchen/LazyingArtCoin/settings/pages" target="_blank" rel="noopener noreferrer">
+                            Configure GitHub Pages
+                        </a>
+                        <a class="btn btn-secondary" href="mailto:contact@lazying.art">
+                            Contact LazyingArt
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Built by LazyingArt · Connect with us at <a href="mailto:contact@lazying.art">contact@lazying.art</a>
+    </footer>
+</body>
+</html>
