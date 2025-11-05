@@ -63,6 +63,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .brand {
@@ -77,6 +79,10 @@
             display: flex;
             gap: 1.2rem;
             font-size: 0.9rem;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex: 1;
         }
 
         .nav-links a {
@@ -87,6 +93,32 @@
 
         .nav-links a:hover {
             color: var(--accent-secondary);
+        }
+
+        .lang-wrap {
+            display: flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(91, 226, 255, 0.24);
+            background: rgba(91, 226, 255, 0.12);
+        }
+
+        .lang-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .lang-select:focus {
+            outline: none;
         }
 
         main {
@@ -262,6 +294,14 @@
                 display: none;
             }
 
+            nav {
+                justify-content: space-between;
+            }
+
+            .lang-wrap {
+                margin-left: auto;
+            }
+
             .timeline-item {
                 grid-template-columns: 1fr;
             }
@@ -276,12 +316,29 @@
     <div class="stars"></div>
     <header>
         <nav>
-            <span class="brand">LazyingArt Coin</span>
+            <span class="brand" data-i18n="brand_name">LazyingArt Coin</span>
             <div class="nav-links">
-                <a href="#utility">Utility</a>
-                <a href="#ecosystem">Ecosystem</a>
-                <a href="#roadmap">Roadmap</a>
-                <a href="#connect">Connect</a>
+                <a href="#utility" data-i18n="nav_utility">Utility</a>
+                <a href="#ecosystem" data-i18n="nav_ecosystem">Ecosystem</a>
+                <a href="#roadmap" data-i18n="nav_roadmap">Roadmap</a>
+                <a href="#connect" data-i18n="nav_connect">Connect</a>
+            </div>
+            <div class="lang-wrap">
+                <select id="langSelect" class="lang-select" aria-label="Language">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="zh-Hans">🇨🇳 简体中文</option>
+                    <option value="zh-Hant">🇹🇼 繁體中文</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="pt">🇵🇹 Português</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                </select>
             </div>
         </nav>
     </header>
@@ -290,33 +347,33 @@
         <section>
             <div class="container hero">
                 <div>
-                    <span class="badge">Token Utility</span>
-                    <h1>The reward layer for the LazyingArt universe.</h1>
-                    <p>
+                    <span class="badge" data-i18n="hero_badge">Token Utility</span>
+                    <h1 data-i18n="hero_title">The reward layer for the LazyingArt universe.</h1>
+                    <p data-i18n="hero_intro">
                         LazyingArt Coin powers incentives across <span class="highlight">OnlyIdeas</span>,
                         <span class="highlight">EchoMind</span>, and the broader LazyingArt studio.
                         Every contribution, conversation, and creative insight earns value that can move
                         on-chain when you are ready.
                     </p>
                     <div class="hero-actions">
-                        <a class="btn btn-primary" href="https://lazying.art" target="_blank" rel="noopener noreferrer">
+                        <a class="btn btn-primary" href="https://lazying.art" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_primary">
                             Explore LazyingArt
                         </a>
-                        <a class="btn btn-secondary" href="https://onlyideas.art" target="_blank" rel="noopener noreferrer">
+                        <a class="btn btn-secondary" href="https://onlyideas.art" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_onlyideas">
                             Visit OnlyIdeas
                         </a>
-                        <a class="btn btn-secondary" href="https://chat.lazying.art" target="_blank" rel="noopener noreferrer">
+                        <a class="btn btn-secondary" href="https://chat.lazying.art" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_echomind">
                             Meet EchoMind
                         </a>
-                        <a class="btn btn-secondary" href="https://github.com/lachlanchen/LazyingArtCoin" target="_blank" rel="noopener noreferrer">
+                        <a class="btn btn-secondary" href="https://github.com/lachlanchen/LazyingArtCoin" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_repo">
                             View Repository
                         </a>
                     </div>
                 </div>
                 <div>
                     <div class="card">
-                        <h3>Engineered for creators</h3>
-                        <p>
+                        <h3 data-i18n="hero_card_title">Engineered for creators</h3>
+                        <p data-i18n="hero_card_body">
                             The LazyingArt Coin service issues credits on contribution, settles balances in ETH or
                             ERC-20 tokens, and keeps a transparent ledger. It connects the community spaces where
                             creative work, AI dialogue, and membership intersect.
@@ -328,36 +385,36 @@
 
         <section id="utility">
             <div class="container">
-                <h2 class="section-title">Designed for real utility</h2>
-                <p class="section-lead">
+                <h2 class="section-title" data-i18n="utility_title">Designed for real utility</h2>
+                <p class="section-lead" data-i18n="utility_subtitle">
                     Credits start inside our apps and graduate to on-chain value. The MVP shipping in this repository
                     focuses on reliability, clear conversion, and transparent accounting.
                 </p>
                 <div class="card-grid">
                     <div class="card">
-                        <h3>Creator Earnings</h3>
-                        <p>
+                        <h3 data-i18n="utility_card1_title">Creator Earnings</h3>
+                        <p data-i18n="utility_card1_desc">
                             OnlyIdeas rewards community proposals, critiques, and curated research with credits that
                             convert to LazyingArt Coin balances.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>AI Collaboration</h3>
-                        <p>
+                        <h3 data-i18n="utility_card2_title">AI Collaboration</h3>
+                        <p data-i18n="utility_card2_desc">
                             EchoMind sessions unlock bonuses for multilingual coaching, conversation hosting, and prompt
                             design that keeps the experience human-first.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>Studio Loyalty</h3>
-                        <p>
+                        <h3 data-i18n="utility_card3_title">Studio Loyalty</h3>
+                        <p data-i18n="utility_card3_desc">
                             LazyingArt flagship launches, hardware drops, and field labs issue seasonal quests tied to
                             the coin, giving contributors early access and revenue share experiments.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>On-Chain Payouts</h3>
-                        <p>
+                        <h3 data-i18n="utility_card4_title">On-Chain Payouts</h3>
+                        <p data-i18n="utility_card4_desc">
                             Secure Tornado + Web3 backend pays out in ETH or a configured ERC-20 token when balances
                             clear review, with idempotent requests and nonce locking.
                         </p>
@@ -368,26 +425,26 @@
 
         <section id="ecosystem">
             <div class="container">
-                <span class="badge">Ecosystem Links</span>
-                <h2 class="section-title">One coin, three experiences</h2>
+                <span class="badge" data-i18n="ecosystem_badge">Ecosystem Links</span>
+                <h2 class="section-title" data-i18n="ecosystem_title">One coin, three experiences</h2>
                 <div class="card-grid">
                     <div class="card">
-                        <h3>OnlyIdeas</h3>
-                        <p>
+                        <h3 data-i18n="ecosystem_card1_title">OnlyIdeas</h3>
+                        <p data-i18n="ecosystem_card1_desc">
                             Curate the future of art, hardware, and research. Credits flow to contributors whose ideas
                             reach prototype milestones and community adoption.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>EchoMind</h3>
-                        <p>
+                        <h3 data-i18n="ecosystem_card2_title">EchoMind</h3>
+                        <p data-i18n="ecosystem_card2_desc">
                             Multilingual AI conversations earn engagement rewards, with auto-translated transcripts and
                             community moderators capturing the best knowledge moments.
                         </p>
                     </div>
                     <div class="card">
-                        <h3>LazyingArt Studio</h3>
-                        <p>
+                        <h3 data-i18n="ecosystem_card3_title">LazyingArt Studio</h3>
+                        <p data-i18n="ecosystem_card3_desc">
                             The parent studio orchestrates token sinks and unlocks: merch, field experiences, and direct
                             patronage for the teams building the tools.
                         </p>
@@ -398,33 +455,33 @@
 
         <section id="roadmap">
             <div class="container">
-                <h2 class="section-title">Roadmap highlights</h2>
+                <h2 class="section-title" data-i18n="roadmap_title">Roadmap highlights</h2>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-date">Now</div>
+                        <div class="timeline-date" data-i18n="roadmap_now_date">Now</div>
                         <div class="timeline-content">
-                            <strong>Credits MVP shipped.</strong>
-                            <p>
+                            <strong data-i18n="roadmap_now_heading">Credits MVP shipped.</strong>
+                            <p data-i18n="roadmap_now_body">
                                 Tornado service with SQLite ledger, Sepolia payout support, and a clean admin UI is ready
                                 for experiments inside the ecosystem.
                             </p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">Q3</div>
+                        <div class="timeline-date" data-i18n="roadmap_q3_date">Q3</div>
                         <div class="timeline-content">
-                            <strong>Creator beta.</strong>
-                            <p>
+                            <strong data-i18n="roadmap_q3_heading">Creator beta.</strong>
+                            <p data-i18n="roadmap_q3_body">
                                 Onboard OnlyIdeas cohorts and EchoMind hosts, tune earn curves, and monitor gas analytics
                                 before scaling community programs.
                             </p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">Q4</div>
+                        <div class="timeline-date" data-i18n="roadmap_q4_date">Q4</div>
                         <div class="timeline-content">
-                            <strong>Public launch.</strong>
-                            <p>
+                            <strong data-i18n="roadmap_q4_heading">Public launch.</strong>
+                            <p data-i18n="roadmap_q4_body">
                                 Open up LazyingArt Coin to partners, publish the token playbook, and introduce automatic
                                 conversion bridges inside LazyingArt hardware and web apps.
                             </p>
@@ -437,16 +494,16 @@
         <section id="connect">
             <div class="container">
                 <div class="card" style="text-align: center;">
-                    <h3>Be part of the LazyingArt Coin rollout</h3>
-                    <p style="margin-bottom: 1.5rem;">
+                    <h3 data-i18n="cta_title">Be part of the LazyingArt Coin rollout</h3>
+                    <p style="margin-bottom: 1.5rem;" data-i18n="cta_description">
                         We’re expanding early access with creators, engineers, and multilingual hosts. Share how you want
                         to plug in and we’ll follow up with launch details, community calls, and integration guides.
                     </p>
                     <div class="hero-actions" style="justify-content: center;">
-                        <a class="btn btn-primary" href="mailto:contact@lazying.art?subject=LazyingArt%20Coin%20Early%20Access">
+                        <a class="btn btn-primary" href="mailto:contact@lazying.art?subject=LazyingArt%20Coin%20Early%20Access" data-i18n="cta_primary">
                             Request Early Access
                         </a>
-                        <a class="btn btn-secondary" href="https://onlyideas.art" target="_blank" rel="noopener noreferrer">
+                        <a class="btn btn-secondary" href="https://onlyideas.art" target="_blank" rel="noopener noreferrer" data-i18n="cta_secondary">
                             Explore OnlyIdeas
                         </a>
                     </div>
@@ -455,8 +512,586 @@
         </section>
     </main>
 
-    <footer>
+    <footer data-i18n="footer_copy">
         Built by LazyingArt · Connect with us at <a href="mailto:contact@lazying.art">contact@lazying.art</a>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const STORAGE_KEY = 'lac-lang';
+            const supportedLangs = ['en', 'ja', 'zh-Hans', 'zh-Hant', 'ko', 'ar', 'vi', 'fr', 'es', 'pt', 'de', 'ru', 'tr'];
+            const rtlLangs = ['ar'];
+
+            const baseTranslations = {
+                brand_name: `LazyingArt Coin`,
+                nav_utility: `Utility`,
+                nav_ecosystem: `Ecosystem`,
+                nav_roadmap: `Roadmap`,
+                nav_connect: `Connect`,
+                hero_badge: `Token Utility`,
+                hero_title: `The reward layer for the LazyingArt universe.`,
+                hero_intro: `LazyingArt Coin powers incentives across <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span>, and the broader LazyingArt studio. Every contribution, conversation, and creative insight earns value that can move on-chain when you are ready.`,
+                hero_btn_primary: `Explore LazyingArt`,
+                hero_btn_onlyideas: `Visit OnlyIdeas`,
+                hero_btn_echomind: `Meet EchoMind`,
+                hero_btn_repo: `View Repository`,
+                hero_card_title: `Engineered for creators`,
+                hero_card_body: `The LazyingArt Coin service issues credits on contribution, settles balances in ETH or ERC-20 tokens, and keeps a transparent ledger. It connects the community spaces where creative work, AI dialogue, and membership intersect.`,
+                utility_title: `Designed for real utility`,
+                utility_subtitle: `Credits start inside our apps and graduate to on-chain value. The MVP shipping in this repository focuses on reliability, clear conversion, and transparent accounting.`,
+                ecosystem_badge: `Ecosystem Links`,
+                ecosystem_title: `One coin, three experiences`,
+                roadmap_title: `Roadmap highlights`,
+                roadmap_now_date: `Now`,
+                roadmap_now_heading: `Credits MVP shipped.`,
+                roadmap_now_body: `Tornado service with SQLite ledger, Sepolia payout support, and a clean admin UI is ready for experiments inside the ecosystem.`,
+                roadmap_q3_date: `Q3`,
+                roadmap_q3_heading: `Creator beta.`,
+                roadmap_q3_body: `Onboard OnlyIdeas cohorts and EchoMind hosts, tune earn curves, and monitor gas analytics before scaling community programs.`,
+                roadmap_q4_date: `Q4`,
+                roadmap_q4_heading: `Public launch.`,
+                roadmap_q4_body: `Open up LazyingArt Coin to partners, publish the token playbook, and introduce automatic conversion bridges inside LazyingArt hardware and web apps.`,
+                cta_title: `Be part of the LazyingArt Coin rollout`,
+                cta_description: `We’re expanding early access with creators, engineers, and multilingual hosts. Share how you want to plug in and we’ll follow up with launch details, community calls, and integration guides.`,
+                cta_primary: `Request Early Access`,
+                cta_secondary: `Explore OnlyIdeas`,
+                footer_copy: `Built by LazyingArt · Connect with us at <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+            };
+
+            const translationOverrides = {
+                en: {},
+                ja: {
+                    nav_utility: `ユーティリティ`,
+                    nav_ecosystem: `エコシステム`,
+                    nav_roadmap: `ロードマップ`,
+                    nav_connect: `コンタクト`,
+                    hero_badge: `トークンユーティリティ`,
+                    hero_title: `LazyingArtユニバースを支える報酬レイヤー。`,
+                    hero_intro: `LazyingArt Coinは<span class="highlight">OnlyIdeas</span>、<span class="highlight">EchoMind</span>、そしてLazyingArtスタジオ全体に価値の循環をもたらすインセンティブ基盤です。あらゆる貢献や会話、ひらめきが、必要なタイミングでオンチェーン価値へ変換されます。`,
+                    hero_btn_primary: `LazyingArtを探る`,
+                    hero_btn_onlyideas: `OnlyIdeasへ`,
+                    hero_btn_echomind: `EchoMindに会う`,
+                    hero_btn_repo: `リポジトリを見る`,
+                    hero_card_title: `クリエイターのために設計`,
+                    hero_card_body: `貢献に応じたクレジット発行、ETH/トークンでの精算、透明な台帳管理でコミュニティの創造活動をつなぎます。`,
+                    utility_title: `本物のユーティリティを追求`,
+                    utility_subtitle: `クレジットはアプリから始まり、オンチェーン価値へ成長します。このMVPは信頼性、明快な交換レート、透明性を最優先に設計されています。`,
+                    ecosystem_badge: `エコシステムリンク`,
+                    ecosystem_title: `ひとつのコイン、三つの体験`,
+                    roadmap_title: `ロードマップハイライト`,
+                    roadmap_now_date: `今`,
+                    roadmap_now_heading: `クレジットMVPをリリース`,
+                    roadmap_now_body: `SQLite台帳とSepolia支払い、軽量UIを備えたトルネードサービスで実験を開始できます。`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `クリエイターベータ`,
+                    roadmap_q3_body: `OnlyIdeasコホートやEchoMindホストをオンボードし、報酬カーブとガス分析を調整します。`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `パブリックローンチ`,
+                    roadmap_q4_body: `パートナーへ開放し、トークンプレイブックを公開。ハードウェアとWebアプリへ自動変換ブリッジを導入します。`,
+                    cta_title: `LazyingArt Coinローンチに参加しよう`,
+                    cta_description: `クリエイター、エンジニア、多言語ホスト向けの早期アクセスを拡大中です。参加したい形を教えていただければ、ローンチ情報やコミュニティコールをご案内します。`,
+                    cta_primary: `早期アクセスをリクエスト`,
+                    cta_secondary: `OnlyIdeasを探索`,
+                    footer_copy: `LazyingArtが運営 · お問い合わせ: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                'zh-Hans': {
+                    nav_utility: `实用功能`,
+                    nav_ecosystem: `生态系统`,
+                    nav_roadmap: `路线图`,
+                    nav_connect: `联系`,
+                    hero_badge: `代币实用性`,
+                    hero_title: `LazyingArt 宇宙的奖励层。`,
+                    hero_intro: `LazyingArt Coin 为 <span class="highlight">OnlyIdeas</span>、<span class="highlight">EchoMind</span> 以及更广泛的 LazyingArt 工作室提供激励动力，让每一次贡献、对话和灵感都能在需要时转换为链上价值。`,
+                    hero_btn_primary: `探索 LazyingArt`,
+                    hero_btn_onlyideas: `访问 OnlyIdeas`,
+                    hero_btn_echomind: `体验 EchoMind`,
+                    hero_btn_repo: `查看代码库`,
+                    hero_card_title: `为创作者而生`,
+                    hero_card_body: `通过贡献发放积分、以 ETH 或代币结算，并保留透明账本，让创作社区、AI 对话与会员体系保持连接。`,
+                    utility_title: `面向真实场景的设计`,
+                    utility_subtitle: `积分从应用内起步，最终成长为链上价值。本仓库中的 MVP 聚焦可靠性、清晰的兑换比例以及透明核算。`,
+                    ecosystem_badge: `生态链接`,
+                    ecosystem_title: `一枚代币，三种体验`,
+                    roadmap_title: `路线图亮点`,
+                    roadmap_now_date: `现在`,
+                    roadmap_now_heading: `积分 MVP 已发布`,
+                    roadmap_now_body: `基于 SQLite 账本、Sepolia 支付以及简洁管理界面的 Tornado 服务，已准备好在生态系统内试验。`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `创作者内测`,
+                    roadmap_q3_body: `邀请 OnlyIdeas 和 EchoMind 社群，调优奖励曲线并持续监测 gas 成本。`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `公开上线`,
+                    roadmap_q4_body: `面向合作伙伴开放、发布代币玩法手册，并在 LazyingArt 硬件与 Web 应用内引入自动转换桥。`,
+                    cta_title: `加入 LazyingArt Coin 推出计划`,
+                    cta_description: `我们正在与创作者、工程师以及多语主持人扩展早期体验。告诉我们你的参与方式，我们会跟进发布详情、社区会议与集成指南。`,
+                    cta_primary: `申请早期体验`,
+                    cta_secondary: `探索 OnlyIdeas`,
+                    footer_copy: `由 LazyingArt 构建 · 联系我们：<a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                'zh-Hant': {
+                    nav_utility: `實用功能`,
+                    nav_ecosystem: `生態系`,
+                    nav_roadmap: `路線圖`,
+                    nav_connect: `聯絡`,
+                    hero_badge: `代幣實用性`,
+                    hero_title: `LazyingArt 宇宙的獎勵層。`,
+                    hero_intro: `LazyingArt Coin 為 <span class="highlight">OnlyIdeas</span>、<span class="highlight">EchoMind</span> 以及整個 LazyingArt 工作室帶來獎勵循環，讓每一次貢獻、對話與靈感都能在需要時轉化為鏈上價值。`,
+                    hero_btn_primary: `探索 LazyingArt`,
+                    hero_btn_onlyideas: `造訪 OnlyIdeas`,
+                    hero_btn_echomind: `體驗 EchoMind`,
+                    hero_btn_repo: `檢視程式庫`,
+                    hero_card_title: `為創作者打造`,
+                    hero_card_body: `透過貢獻發放積分、以 ETH 或代幣結算，並保持透明帳本，串起創作社群、AI 對話與會員體驗。`,
+                    utility_title: `專注真實效用`,
+                    utility_subtitle: `積分從應用開始，最終轉化為鏈上價值。此 MVP 著重於可靠性、清楚的兌換比例與透明核算。`,
+                    ecosystem_badge: `生態系連結`,
+                    ecosystem_title: `一枚代幣，三種體驗`,
+                    roadmap_title: `路線圖亮點`,
+                    roadmap_now_date: `現在`,
+                    roadmap_now_heading: `積分 MVP 已推出`,
+                    roadmap_now_body: `整合 SQLite 帳本、Sepolia 支付與輕量管理介面的 Tornado 服務已可在生態內試驗。`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `創作者測試`,
+                    roadmap_q3_body: `邀請 OnlyIdeas 與 EchoMind 社群，調校獎勵曲線並持續監測 gas 成本。`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `公開上市`,
+                    roadmap_q4_body: `向合作夥伴開放，發佈代幣操作手冊，並在 LazyingArt 硬體與 Web 應用內導入自動兌換橋接。`,
+                    cta_title: `參與 LazyingArt Coin 的推出`,
+                    cta_description: `我們正與創作者、工程師與多語主持人擴大早鳥體驗。告訴我們你的參與方式，我們會提供發佈資訊、社群會議與整合指南。`,
+                    cta_primary: `申請早鳥體驗`,
+                    cta_secondary: `探索 OnlyIdeas`,
+                    footer_copy: `由 LazyingArt 建構 · 聯絡我們：<a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                ko: {
+                    nav_utility: `유틸리티`,
+                    nav_ecosystem: `에코시스템`,
+                    nav_roadmap: `로드맵`,
+                    nav_connect: `문의`,
+                    hero_badge: `토큰 유틸리티`,
+                    hero_title: `LazyingArt 우주를 지탱하는 보상 레이어.`,
+                    hero_intro: `LazyingArt Coin은 <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span>, 그리고 LazyingArt 스튜디오 전반을 연결하는 인센티브 엔진입니다. 모든 기여와 대화, 영감이 필요할 때 온체인 가치로 전환됩니다.`,
+                    hero_btn_primary: `LazyingArt 살펴보기`,
+                    hero_btn_onlyideas: `OnlyIdeas 방문`,
+                    hero_btn_echomind: `EchoMind 만나보기`,
+                    hero_btn_repo: `저장소 보기`,
+                    hero_card_title: `크리에이터를 위해 설계`,
+                    hero_card_body: `기여에 따라 크레딧을 발행하고 ETH/토큰으로 정산하며, 투명한 원장을 유지해 커뮤니티, AI 대화, 멤버십을 연결합니다.`,
+                    utility_title: `실용성에 초점을 맞춘 설계`,
+                    utility_subtitle: `크레딧은 앱에서 시작해 온체인 가치로 확장됩니다. 이 MVP는 신뢰성, 명확한 전환, 투명한 회계를 최우선으로 합니다.`,
+                    ecosystem_badge: `에코시스템 링크`,
+                    ecosystem_title: `하나의 코인, 세 가지 경험`,
+                    roadmap_title: `로드맵 하이라이트`,
+                    roadmap_now_date: `지금`,
+                    roadmap_now_heading: `크레딧 MVP 출시`,
+                    roadmap_now_body: `SQLite 원장, Sepolia 지급, 간결한 관리 UI를 갖춘 토네이도 서비스로 실험을 시작할 수 있습니다.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `크리에이터 베타`,
+                    roadmap_q3_body: `OnlyIdeas 코호트와 EchoMind 호스트를 온보딩하며 보상 곡선과 gas 분석을 조정합니다.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `퍼블릭 런치`,
+                    roadmap_q4_body: `파트너에게 개방하고 토큰 플레이북을 게시하며, LazyingArt 하드웨어와 웹 앱에 자동 변환 브리지를 도입합니다.`,
+                    cta_title: `LazyingArt Coin 롤아웃에 함께하세요`,
+                    cta_description: `크리에이터, 엔지니어, 다국어 진행자를 위한 얼리 액세스를 확대 중입니다. 참여 방식을 알려 주시면 론칭 정보와 커뮤니티 콜, 통합 가이드를 안내해 드립니다.`,
+                    cta_primary: `얼리 액세스 요청`,
+                    cta_secondary: `OnlyIdeas 탐색`,
+                    footer_copy: `LazyingArt가 제작 · 문의: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                ar: {
+                    nav_utility: `الفوائد`,
+                    nav_ecosystem: `النظام البيئي`,
+                    nav_roadmap: `خارطة الطريق`,
+                    nav_connect: `تواصل`,
+                    hero_badge: `فائدة الرمز`,
+                    hero_title: `طبقة المكافآت لمنظومة LazyingArt.`,
+                    hero_intro: `يمد LazyingArt Coin الحوافز عبر <span class="highlight">OnlyIdeas</span> و<span class="highlight">EchoMind</span> واستوديو LazyingArt الأوسع، بحيث تتحول كل مساهمة أو محادثة أو ومضة إلهام إلى قيمة على السلسلة وقتما تحتاج إليها.`,
+                    hero_btn_primary: `استكشف LazyingArt`,
+                    hero_btn_onlyideas: `زر OnlyIdeas`,
+                    hero_btn_echomind: `تعرّف على EchoMind`,
+                    hero_btn_repo: `عرض المستودع`,
+                    hero_card_title: `مصمم للمبدعين`,
+                    hero_card_body: `خدمة LazyingArt Coin تصدر أرصدة مقابل المساهمات، وتسوي الأرصدة بعملة ETH أو رموز، وتحافظ على سجل شفاف يربط المجتمع الإبداعي وحوارات الذكاء الاصطناعي وعضويات المنصة.`,
+                    utility_title: `مصمم لفائدة حقيقية`,
+                    utility_subtitle: `تبدأ الأرصدة داخل تطبيقاتنا ثم تتدرج إلى قيمة على السلسلة. يركز هذا النموذج الأولي على الاعتمادية، والتحويل الواضح، والشفافية.`,
+                    ecosystem_badge: `روابط النظام البيئي`,
+                    ecosystem_title: `عملة واحدة وثلاث تجارب`,
+                    roadmap_title: `أبرز محطات خارطة الطريق`,
+                    roadmap_now_date: `الآن`,
+                    roadmap_now_heading: `إطلاق نموذج الأرصدة.`,
+                    roadmap_now_body: `خدمة Tornado مع سجل SQLite ودعم مدفوعات Sepolia وواجهة إدارية بسيطة جاهزة للتجربة داخل المنظومة.`,
+                    roadmap_q3_date: `الربع الثالث`,
+                    roadmap_q3_heading: `نسخة تجريبية للمبدعين.`,
+                    roadmap_q3_body: `ضم مجموعات OnlyIdeas ومضيفي EchoMind وضبط منحنيات المكافآت ومراقبة تكاليف الغاز قبل التوسع.`,
+                    roadmap_q4_date: `الربع الرابع`,
+                    roadmap_q4_heading: `إطلاق عام.`,
+                    roadmap_q4_body: `فتح LazyingArt Coin للشركاء، نشر دليل استخدام الرمز، وإضافة جسور تحويل تلقائي داخل أجهزة LazyingArt وتطبيقاتها.`,
+                    cta_title: `كن جزءاً من إطلاق LazyingArt Coin`,
+                    cta_description: `نوسع الوصول المبكر للمبدعين والمهندسين والمضيفين متعددي اللغات. شاركنا كيف تود الانضمام وسنوافيك بتفاصيل الإطلاق واجتماعات المجتمع وأدلة التكامل.`,
+                    cta_primary: `اطلب الوصول المبكر`,
+                    cta_secondary: `استكشف OnlyIdeas`,
+                    footer_copy: `طُوِّر بواسطة LazyingArt · تواصل معنا عبر <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                vi: {
+                    nav_utility: `Tiện ích`,
+                    nav_ecosystem: `Hệ sinh thái`,
+                    nav_roadmap: `Lộ trình`,
+                    nav_connect: `Kết nối`,
+                    hero_badge: `Tiện ích token`,
+                    hero_title: `Lớp phần thưởng cho vũ trụ LazyingArt.`,
+                    hero_intro: `LazyingArt Coin cung cấp động lực cho <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> và toàn bộ studio LazyingArt, biến mọi đóng góp, cuộc trò chuyện và ý tưởng thành giá trị on-chain đúng lúc bạn cần.`,
+                    hero_btn_primary: `Khám phá LazyingArt`,
+                    hero_btn_onlyideas: `Truy cập OnlyIdeas`,
+                    hero_btn_echomind: `Gặp gỡ EchoMind`,
+                    hero_btn_repo: `Xem kho mã`,
+                    hero_card_title: `Thiết kế cho người sáng tạo`,
+                    hero_card_body: `Dịch vụ LazyingArt Coin phát hành tín dụng theo đóng góp, thanh toán bằng ETH hoặc token và duy trì sổ cái minh bạch nối liền cộng đồng sáng tạo, hội thoại AI và chương trình thành viên.`,
+                    utility_title: `Hướng đến giá trị thực tế`,
+                    utility_subtitle: `Tín dụng bắt đầu trong ứng dụng và phát triển thành giá trị on-chain. MVP này ưu tiên độ tin cậy, tỷ lệ quy đổi rõ ràng và việc ghi nhận minh bạch.`,
+                    ecosystem_badge: `Liên kết hệ sinh thái`,
+                    ecosystem_title: `Một đồng coin, ba trải nghiệm`,
+                    roadmap_title: `Điểm nhấn lộ trình`,
+                    roadmap_now_date: `Hiện tại`,
+                    roadmap_now_heading: `Ra mắt MVP tín dụng`,
+                    roadmap_now_body: `Dịch vụ Tornado với sổ cái SQLite, hỗ trợ chi trả Sepolia và giao diện quản trị gọn nhẹ đã sẵn sàng cho thử nghiệm trong hệ sinh thái.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Beta cho creator`,
+                    roadmap_q3_body: `Onboard các nhóm OnlyIdeas và host EchoMind, tinh chỉnh đường cong thưởng và theo dõi chi phí gas trước khi mở rộng.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Phát hành công khai`,
+                    roadmap_q4_body: `Mở LazyingArt Coin cho đối tác, công bố sổ tay token và bổ sung cầu chuyển đổi tự động vào phần cứng và ứng dụng của LazyingArt.`,
+                    cta_title: `Tham gia đợt triển khai LazyingArt Coin`,
+                    cta_description: `Chúng tôi đang mở rộng quyền truy cập sớm cho creator, kỹ sư và host đa ngôn ngữ. Hãy chia sẻ cách bạn muốn tham gia, chúng tôi sẽ liên hệ với thông tin ra mắt, buổi community call và hướng dẫn tích hợp.`,
+                    cta_primary: `Xin quyền truy cập sớm`,
+                    cta_secondary: `Khám phá OnlyIdeas`,
+                    footer_copy: `Được xây dựng bởi LazyingArt · Liên hệ: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                fr: {
+                    nav_utility: `Utilité`,
+                    nav_ecosystem: `Écosystème`,
+                    nav_roadmap: `Feuille de route`,
+                    nav_connect: `Contact`,
+                    hero_badge: `Utilité du token`,
+                    hero_title: `La couche de récompense de l’univers LazyingArt.`,
+                    hero_intro: `LazyingArt Coin alimente les incitations de <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> et du studio LazyingArt au sens large. Chaque contribution, conversation et éclair d’inspiration peut devenir une valeur on-chain au moment opportun.`,
+                    hero_btn_primary: `Explorer LazyingArt`,
+                    hero_btn_onlyideas: `Visiter OnlyIdeas`,
+                    hero_btn_echomind: `Rencontrer EchoMind`,
+                    hero_btn_repo: `Voir le dépôt`,
+                    hero_card_title: `Conçu pour les créateurs`,
+                    hero_card_body: `Le service LazyingArt Coin émet des crédits selon la contribution, règle les soldes en ETH ou en tokens et maintient un registre transparent reliant communautés créatives, discussions IA et adhésions.`,
+                    utility_title: `Pensé pour une utilité réelle`,
+                    utility_subtitle: `Les crédits naissent dans nos applications puis se transforment en valeur on-chain. Ce MVP privilégie la fiabilité, une conversion claire et une comptabilité transparente.`,
+                    ecosystem_badge: `Liens écosystème`,
+                    ecosystem_title: `Une seule pièce, trois expériences`,
+                    roadmap_title: `Temps forts de la feuille de route`,
+                    roadmap_now_date: `Maintenant`,
+                    roadmap_now_heading: `MVP des crédits livré.`,
+                    roadmap_now_body: `Un service Tornado avec registre SQLite, paiements Sepolia et interface administrative légère prêt pour l’expérimentation dans l’écosystème.`,
+                    roadmap_q3_date: `T3`,
+                    roadmap_q3_heading: `Bêta créateurs.`,
+                    roadmap_q3_body: `Onboarder les cohortes OnlyIdeas et les hôtes EchoMind, ajuster les courbes de récompense et surveiller l’analytique gas avant la montée en charge.`,
+                    roadmap_q4_date: `T4`,
+                    roadmap_q4_heading: `Lancement public.`,
+                    roadmap_q4_body: `Ouvrir LazyingArt Coin aux partenaires, publier le playbook token et introduire des passerelles de conversion automatique dans le hardware et le web LazyingArt.`,
+                    cta_title: `Participez au déploiement de LazyingArt Coin`,
+                    cta_description: `Nous étendons l’accès anticipé aux créateurs, ingénieurs et animateurs multilingues. Dites-nous comment vous souhaitez contribuer et nous vous enverrons les détails de lancement, les appels communautaires et les guides d’intégration.`,
+                    cta_primary: `Demander un accès anticipé`,
+                    cta_secondary: `Explorer OnlyIdeas`,
+                    footer_copy: `Créé par LazyingArt · Contactez-nous : <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                es: {
+                    nav_utility: `Utilidad`,
+                    nav_ecosystem: `Ecosistema`,
+                    nav_roadmap: `Hoja de ruta`,
+                    nav_connect: `Contacto`,
+                    hero_badge: `Utilidad del token`,
+                    hero_title: `La capa de recompensas del universo LazyingArt.`,
+                    hero_intro: `LazyingArt Coin impulsa los incentivos de <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> y del estudio LazyingArt en general, convirtiendo cada contribución, conversación e idea en valor on-chain cuando lo necesitas.`,
+                    hero_btn_primary: `Explorar LazyingArt`,
+                    hero_btn_onlyideas: `Visitar OnlyIdeas`,
+                    hero_btn_echomind: `Conocer EchoMind`,
+                    hero_btn_repo: `Ver repositorio`,
+                    hero_card_title: `Ingenierizado para creadores`,
+                    hero_card_body: `El servicio LazyingArt Coin emite créditos por contribución, liquida saldos en ETH o tokens y mantiene un libro mayor transparente que conecta la comunidad creativa, el diálogo con IA y la membresía.`,
+                    utility_title: `Diseñado para una utilidad real`,
+                    utility_subtitle: `Los créditos comienzan en nuestras apps y evolucionan hacia valor on-chain. Este MVP prioriza la fiabilidad, la conversión clara y la contabilidad transparente.`,
+                    ecosystem_badge: `Enlaces del ecosistema`,
+                    ecosystem_title: `Una moneda, tres experiencias`,
+                    roadmap_title: `Hitos de la hoja de ruta`,
+                    roadmap_now_date: `Ahora`,
+                    roadmap_now_heading: `MVP de créditos entregado.`,
+                    roadmap_now_body: `Servicio Tornado con libro mayor SQLite, pagos en Sepolia y una interfaz administrativa limpia listo para experimentar dentro del ecosistema.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Beta para creadores.`,
+                    roadmap_q3_body: `Incorporar cohortes de OnlyIdeas y hosts de EchoMind, ajustar curvas de recompensa y monitorizar la analítica de gas antes de escalar.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Lanzamiento público.`,
+                    roadmap_q4_body: `Abrir LazyingArt Coin a partners, publicar el playbook de token y añadir puentes de conversión automática en el hardware y las apps web de LazyingArt.`,
+                    cta_title: `Forma parte del despliegue de LazyingArt Coin`,
+                    cta_description: `Estamos ampliando el acceso anticipado para creadores, ingenieros y anfitriones multilingües. Cuéntanos cómo quieres participar y te enviaremos detalles de lanzamiento, llamadas comunitarias y guías de integración.`,
+                    cta_primary: `Solicitar acceso anticipado`,
+                    cta_secondary: `Explorar OnlyIdeas`,
+                    footer_copy: `Construido por LazyingArt · Contáctanos en <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                pt: {
+                    nav_utility: `Utilidade`,
+                    nav_ecosystem: `Ecossistema`,
+                    nav_roadmap: `Roteiro`,
+                    nav_connect: `Contato`,
+                    hero_badge: `Utilidade do token`,
+                    hero_title: `A camada de recompensas do universo LazyingArt.`,
+                    hero_intro: `LazyingArt Coin alimenta os incentivos do <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> e do estúdio LazyingArt como um todo, transformando cada contribuição, conversa e insight em valor on-chain no momento certo.`,
+                    hero_btn_primary: `Explorar a LazyingArt`,
+                    hero_btn_onlyideas: `Visitar OnlyIdeas`,
+                    hero_btn_echomind: `Conhecer EchoMind`,
+                    hero_btn_repo: `Ver repositório`,
+                    hero_card_title: `Projetado para criadores`,
+                    hero_card_body: `O serviço LazyingArt Coin emite créditos por contribuição, liquida saldos em ETH ou tokens e mantém um livro razão transparente que conecta comunidade criativa, diálogos de IA e programas de membresia.`,
+                    utility_title: `Pensado para utilidade real`,
+                    utility_subtitle: `Os créditos começam em nossos apps e evoluem para valor on-chain. Este MVP prioriza confiabilidade, conversão clara e contabilidade transparente.`,
+                    ecosystem_badge: `Links do ecossistema`,
+                    ecosystem_title: `Uma moeda, três experiências`,
+                    roadmap_title: `Destaques do roadmap`,
+                    roadmap_now_date: `Agora`,
+                    roadmap_now_heading: `MVP de créditos lançado.`,
+                    roadmap_now_body: `Serviço Tornado com razão SQLite, suporte a pagamentos Sepolia e painel administrativo limpo pronto para experimentos dentro do ecossistema.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Beta para criadores.`,
+                    roadmap_q3_body: `Onboard de cohorts do OnlyIdeas e hosts do EchoMind, ajuste de curvas de recompensa e monitoramento de métricas de gás antes de escalar.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Lançamento público.`,
+                    roadmap_q4_body: `Abrir LazyingArt Coin para parceiros, publicar o playbook do token e introduzir pontes de conversão automática no hardware e nos apps web da LazyingArt.`,
+                    cta_title: `Faça parte do lançamento do LazyingArt Coin`,
+                    cta_description: `Estamos ampliando o acesso antecipado para criadores, engenheiros e anfitriões multilíngues. Conte como deseja participar e enviaremos detalhes do lançamento, chamadas da comunidade e guias de integração.`,
+                    cta_primary: `Solicitar acesso antecipado`,
+                    cta_secondary: `Explorar OnlyIdeas`,
+                    footer_copy: `Construído pela LazyingArt · Fale conosco: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                de: {
+                    nav_utility: `Utility`,
+                    nav_ecosystem: `Ökosystem`,
+                    nav_roadmap: `Roadmap`,
+                    nav_connect: `Kontakt`,
+                    hero_badge: `Token-Nutzen`,
+                    hero_title: `Die Belohnungsschicht des LazyingArt-Universums.`,
+                    hero_intro: `LazyingArt Coin sorgt für Anreize in <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> und dem gesamten LazyingArt-Studio. Jede Beteiligung, jedes Gespräch und jeder Einfall kann zum richtigen Zeitpunkt in On-Chain-Wert übergehen.`,
+                    hero_btn_primary: `LazyingArt entdecken`,
+                    hero_btn_onlyideas: `OnlyIdeas besuchen`,
+                    hero_btn_echomind: `EchoMind kennenlernen`,
+                    hero_btn_repo: `Repository ansehen`,
+                    hero_card_title: `Für Creator entwickelt`,
+                    hero_card_body: `Der LazyingArt Coin-Service gibt Credits für Beiträge aus, begleicht Salden in ETH oder Tokens und hält ein transparentes Ledger, das kreative Community, KI-Dialoge und Mitgliedschaft verbindet.`,
+                    utility_title: `Für echte Nutzung gebaut`,
+                    utility_subtitle: `Credits starten in unseren Apps und werden zu On-Chain-Wert. Dieses MVP setzt auf Zuverlässigkeit, klare Umrechnung und transparente Buchführung.`,
+                    ecosystem_badge: `Ökosystem-Links`,
+                    ecosystem_title: `Eine Coin, drei Erlebnisse`,
+                    roadmap_title: `Roadmap-Highlights`,
+                    roadmap_now_date: `Jetzt`,
+                    roadmap_now_heading: `Credits-MVP ausgeliefert.`,
+                    roadmap_now_body: `Tornado-Service mit SQLite-Ledger, Sepolia-Auszahlungen und schlanker Admin-Oberfläche – bereit für Experimente im Ökosystem.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Creator-Beta.`,
+                    roadmap_q3_body: `Onboarding von OnlyIdeas-Kohorten und EchoMind-Hosts, Feintuning der Reward-Kurven und Monitoring der Gas-Analytik vor dem Skalieren.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Öffentlicher Launch.`,
+                    roadmap_q4_body: `LazyingArt Coin für Partner öffnen, Token-Playbook veröffentlichen und automatische Conversion-Brücken in Hardware und Web-Apps von LazyingArt einführen.`,
+                    cta_title: `Teil des LazyingArt Coin Rollouts werden`,
+                    cta_description: `Wir erweitern den Early Access für Creator, Engineers und mehrsprachige Hosts. Teilen Sie uns mit, wie Sie sich einbringen möchten, und wir melden uns mit Launch-Details, Community-Calls und Integrations-Guides.`,
+                    cta_primary: `Early Access anfragen`,
+                    cta_secondary: `OnlyIdeas entdecken`,
+                    footer_copy: `Von LazyingArt entwickelt · Kontakt: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                ru: {
+                    nav_utility: `Возможности`,
+                    nav_ecosystem: `Экосистема`,
+                    nav_roadmap: `Дорожная карта`,
+                    nav_connect: `Связаться`,
+                    hero_badge: `Польза токена`,
+                    hero_title: `Слой вознаграждений во вселенной LazyingArt.`,
+                    hero_intro: `LazyingArt Coin обеспечивает стимулы для <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> и всей студии LazyingArt. Каждая вклад, беседа и идея может стать ончейн-ценностью в нужный момент.`,
+                    hero_btn_primary: `Исследовать LazyingArt`,
+                    hero_btn_onlyideas: `Посетить OnlyIdeas`,
+                    hero_btn_echomind: `Познакомиться с EchoMind`,
+                    hero_btn_repo: `Посмотреть репозиторий`,
+                    hero_card_title: `Создано для креаторов`,
+                    hero_card_body: `Сервис LazyingArt Coin начисляет кредиты за вклад, рассчитывает балансы в ETH или токенах и ведёт прозрачный реестр, объединяя творческое сообщество, диалог с ИИ и программу членства.`,
+                    utility_title: `Создано для практической пользы`,
+                    utility_subtitle: `Кредиты рождаются в наших приложениях и превращаются в ончейн-ценность. Этот MVP делает ставку на надёжность, понятную конверсию и прозрачный учёт.`,
+                    ecosystem_badge: `Связи экосистемы`,
+                    ecosystem_title: `Одна монета — три опыта`,
+                    roadmap_title: `Ключевые события дорожной карты`,
+                    roadmap_now_date: `Сейчас`,
+                    roadmap_now_heading: `MVP кредитов готов.`,
+                    roadmap_now_body: `Сервис Tornado с реестром SQLite, поддержкой выплат в Sepolia и лёгкой админкой готов к экспериментам внутри экосистемы.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Бета для креаторов.`,
+                    roadmap_q3_body: `Онбординг когорт OnlyIdeas и ведущих EchoMind, настройка кривых вознаграждения и мониторинг газовых затрат перед масштабированием.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Публичный запуск.`,
+                    roadmap_q4_body: `Открыть LazyingArt Coin партнёрам, опубликовать руководство по токену и добавить автоматические мосты в устройства и веб-приложения LazyingArt.`,
+                    cta_title: `Присоединяйтесь к запуску LazyingArt Coin`,
+                    cta_description: `Мы расширяем ранний доступ для креаторов, инженеров и многоязычных ведущих. Расскажите, как хотите участвовать, и мы поделимся деталями запуска, встречами комьюнити и гайдами по интеграции.`,
+                    cta_primary: `Запросить ранний доступ`,
+                    cta_secondary: `Исследовать OnlyIdeas`,
+                    footer_copy: `Создано LazyingArt · Свяжитесь с нами: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+                tr: {
+                    nav_utility: `Kullanım`,
+                    nav_ecosystem: `Ekosistem`,
+                    nav_roadmap: `Yol haritası`,
+                    nav_connect: `İletişim`,
+                    hero_badge: `Token faydası`,
+                    hero_title: `LazyingArt evreninin ödül katmanı.`,
+                    hero_intro: `LazyingArt Coin, <span class="highlight">OnlyIdeas</span>, <span class="highlight">EchoMind</span> ve LazyingArt stüdyosunun tamamında teşvikleri besler; her katkı, sohbet ve ilham doğru anda on-chain değere dönüşür.`,
+                    hero_btn_primary: `LazyingArt’ı keşfet`,
+                    hero_btn_onlyideas: `OnlyIdeas’ı ziyaret et`,
+                    hero_btn_echomind: `EchoMind ile tanış`,
+                    hero_btn_repo: `Depoyu görüntüle`,
+                    hero_card_title: `Yaratıcılar için tasarlandı`,
+                    hero_card_body: `LazyingArt Coin servisi katkılara göre kredi verir, bakiyeleri ETH veya token ile kapatır ve yaratıcı topluluğu, yapay zekâ diyaloğunu ve üyeliği birleştiren şeffaf bir kayıt tutar.`,
+                    utility_title: `Gerçek kullanım için tasarlandı`,
+                    utility_subtitle: `Krediler uygulamalarımızda başlar ve on-chain değere dönüşür. Bu MVP; güvenilirlik, net dönüşüm ve şeffaf muhasebeyi önceler.`,
+                    ecosystem_badge: `Ekosistem bağlantıları`,
+                    ecosystem_title: `Tek coin, üç deneyim`,
+                    roadmap_title: `Yol haritası öne çıkanlar`,
+                    roadmap_now_date: `Şimdi`,
+                    roadmap_now_heading: `Kredi MVP’si yayınlandı.`,
+                    roadmap_now_body: `SQLite defteri, Sepolia ödemeleri ve sade yönetim arayüzüyle Tornado servisi ekosistem içi denemelere hazır.`,
+                    roadmap_q3_date: `Q3`,
+                    roadmap_q3_heading: `Yaratıcı betası.`,
+                    roadmap_q3_body: `OnlyIdeas kuluçkaları ve EchoMind sunucularını dahil ederek ödül eğrilerini ayarlıyor, gas analitiğini takip ediyoruz.`,
+                    roadmap_q4_date: `Q4`,
+                    roadmap_q4_heading: `Genel lansman.`,
+                    roadmap_q4_body: `LazyingArt Coin’i iş ortaklarına açıyor, token oyun kitabını yayımlıyor ve LazyingArt donanımına ve web uygulamalarına otomatik dönüşüm köprüleri ekliyoruz.`,
+                    cta_title: `LazyingArt Coin lansmanına katılın`,
+                    cta_description: `Yaratıcılar, mühendisler ve çok dilli sunucular için erken erişimi genişletiyoruz. Nasıl dahil olmak istediğinizi paylaşın; lansman detayları, topluluk çağrıları ve entegrasyon rehberleriyle size dönüş yapalım.`,
+                    cta_primary: `Erken erişim iste`,
+                    cta_secondary: `OnlyIdeas’ı keşfet`,
+                    footer_copy: `LazyingArt tarafından geliştirildi · Bizimle iletişime geçin: <a href="mailto:contact@lazying.art">contact@lazying.art</a>`,
+                },
+            };
+
+            const langSelect = document.getElementById('langSelect');
+
+            const getTranslationDict = (lang) => ({
+                ...baseTranslations,
+                ...(translationOverrides[lang] || {}),
+            });
+
+            const applyTranslations = (lang) => {
+                const dict = getTranslationDict(lang);
+                document.querySelectorAll('[data-i18n]').forEach((el) => {
+                    const key = el.getAttribute('data-i18n');
+                    if (!key) return;
+                    let value = dict[key];
+                    if (value === undefined) {
+                        value = baseTranslations[key] || '';
+                    }
+                    if (value.includes('{year}')) {
+                        value = value.replace('{year}', String(new Date().getFullYear()));
+                    }
+                    el.innerHTML = value;
+                });
+            };
+
+            const setLanguage = (lang, persist = false) => {
+                const normalized = supportedLangs.includes(lang) ? lang : 'en';
+                applyTranslations(normalized);
+                if (langSelect) {
+                    langSelect.value = normalized;
+                }
+                document.documentElement.lang = normalized;
+                document.documentElement.dir = rtlLangs.includes(normalized) ? 'rtl' : 'ltr';
+                if (persist) {
+                    try {
+                        localStorage.setItem(STORAGE_KEY, normalized);
+                    } catch (err) {
+                        console.warn('Unable to persist language preference', err);
+                    }
+                }
+            };
+
+            const normalizeLang = (input) => {
+                if (!input) return null;
+                const lowered = input.toLowerCase();
+                if (lowered.includes('zh')) {
+                    if (lowered.includes('hant') || lowered.includes('tw') || lowered.includes('hk') || lowered.includes('mo')) {
+                        return 'zh-Hant';
+                    }
+                    return 'zh-Hans';
+                }
+                if (lowered.startsWith('pt')) return 'pt';
+                const base = lowered.split(/[-_]/)[0];
+                return supportedLangs.includes(base) ? base : null;
+            };
+
+            const timezoneToLang = (tz) => {
+                const map = {
+                    'Asia/Tokyo': 'ja',
+                    'Asia/Seoul': 'ko',
+                    'Asia/Shanghai': 'zh-Hans',
+                    'Asia/Chongqing': 'zh-Hans',
+                    'Asia/Harbin': 'zh-Hans',
+                    'Asia/Urumqi': 'zh-Hans',
+                    'Asia/Taipei': 'zh-Hant',
+                    'Asia/Hong_Kong': 'zh-Hant',
+                    'Asia/Macau': 'zh-Hant',
+                    'Asia/Ho_Chi_Minh': 'vi',
+                    'Asia/Riyadh': 'ar',
+                    'Asia/Dubai': 'ar',
+                    'Africa/Cairo': 'ar',
+                    'Europe/Paris': 'fr',
+                    'Europe/Berlin': 'de',
+                    'Europe/Madrid': 'es',
+                    'Europe/Lisbon': 'pt',
+                    'America/Sao_Paulo': 'pt',
+                    'Europe/Moscow': 'ru',
+                    'Europe/Istanbul': 'tr',
+                };
+                return map[tz] || null;
+            };
+
+            const detectLanguage = () => {
+                try {
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    if (stored && supportedLangs.includes(stored)) {
+                        return stored;
+                    }
+                } catch (err) {
+                    console.warn('Unable to read stored language', err);
+                }
+
+                const browserLangs = navigator.languages && navigator.languages.length
+                    ? navigator.languages
+                    : [navigator.language || navigator.userLanguage];
+
+                for (const lang of browserLangs) {
+                    const normalized = normalizeLang(lang);
+                    if (normalized) {
+                        return normalized;
+                    }
+                }
+
+                try {
+                    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    const tzLang = timezoneToLang(tz);
+                    if (tzLang) {
+                        return tzLang;
+                    }
+                } catch (err) {
+                    console.warn('Unable to resolve timezone', err);
+                }
+
+                return 'en';
+            };
+
+            const initialLang = detectLanguage();
+            setLanguage(initialLang, false);
+
+            if (langSelect) {
+                langSelect.addEventListener('change', (event) => {
+                    setLanguage(event.target.value, true);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
